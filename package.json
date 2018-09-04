@@ -1,0 +1,18 @@
+{
+  "dependencies": {
+    "typescript": "^2.8.1"
+  },
+  "devDependencies": {
+    "@types/node": "^9.6.1",
+    "onchange": "^3.3.0",
+    "tslint": "^5.9.1",
+    "tslint-config-airbnb": "^5.8.0"
+  },
+  "scripts": {
+    "dev": "onchange 'src/**/*.ts' -- npm run change",
+    "change": "npm run lint && npm run build && npm run start",
+    "lint": "tslint -p tsconfig.json -c tslint.json 'src/**/*.ts'",
+    "build": "tsc",
+    "start": "node ./dist"
+  }
+}

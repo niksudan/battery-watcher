@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "sourceMap": true,
+    "module": "commonjs",
+    "target": "es5",
+    "strictNullChecks": true,
+    "removeComments": true,
+    "lib": ["es2015", "esnext", "esnext.asynciterable"]
+  },
+  "include": ["./src/**/*"]
+}
