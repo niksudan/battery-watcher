@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Battery Watcher</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <section>
+    <div>
+      <strong>Battery Watcher</strong>
+      <br />
+      <a href="https://github.com/niksudan/battery-watcher" target="_blank">GitHub</a> | <a href="#" onclick="quit()">Quit</a>
+    </div>
+  </section>
+  <script type="text/javascript">
+    const remote = require('electron').remote;
+    function quit() {
+      if (remote) {
+        remote.app.exit();
+      }
+    }
+  </script>
+</body>
+
+</html>

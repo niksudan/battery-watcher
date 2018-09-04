@@ -4,9 +4,6 @@ const notifier = require('node-notifier');
 const randomItem = require('random-item');
 const path = require('path');
 
-// Percentage we should look out for
-const threshold = 0.2;
-
 // Warning messages to choose from
 const warnings = [
   'Hey now, battery is getting pretty low there...',
@@ -21,17 +18,20 @@ const warnings = [
   "I don't feel so good Mr Stark...",
 ];
 
-// Run the process
-(async () => {
-  const charging = await isCharging();
-  if (!charging) {
-    const battery = await batteryLevel();
-    if (battery <= threshold) {
-      notifier.notify({
-        title: `Battery at ${battery * 100}%!`,
-        message: randomItem(warnings),
-        icon: path.join(__dirname, 'icon.png'),
-      });
+module.exports = async (threshold, ignoreCharge = false) => {
+  if (!ignoreCharge) {
+    const charging = await isCharging();
+    if (charging) {
+      return;
     }
   }
-})();
+  const battery = await batteryLevel();
+  if (battery > threshold) {
+    return;
+  }
+  notifier.notify({
+    title: `Battery at ${battery * 100}%!`,
+    message: randomItem(warnings),
+    icon: path.join(__dirname, 'icon.png'),
+  });
+};
