@@ -45,6 +45,20 @@ const aggressiveWarnings = [
   "SO IT'S COME TO THIS... I KNEW IT",
 ];
 
+const standardIcons = [
+  '../img/standard1.png',
+  '../img/standard2.png',
+  '../img/standard3.png',
+  '../img/standard4.png',
+];
+
+const aggressiveIcons = [
+  '../img/aggressive1.png',
+  '../img/aggressive2.png',
+  '../img/aggressive3.png',
+  '../img/aggressive4.png',
+];
+
 module.exports = async (threshold, ignoreCharge = false) => {
   if (!ignoreCharge) {
     const charging = await isCharging();
@@ -57,12 +71,14 @@ module.exports = async (threshold, ignoreCharge = false) => {
     return;
   }
   let warnings = standardWarnings;
+  let icons = standardIcons;
   if (battery <= threshold / 2) {
     warnings = aggressiveWarnings;
+    icons = aggressiveIcons;
   }
   notifier.notify({
     title: `${Math.floor(battery * 100)}% Battery Left!`,
     message: randomItem(warnings),
-    icon: path.join(__dirname, 'icon.png'),
+    icon: path.join(__dirname, randomItem(icons)),
   });
 };
