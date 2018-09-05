@@ -2,8 +2,9 @@ const menubar = require('menubar');
 const electron = require('electron');
 const checkBattery = require('./battery');
 
-const threshold = 0.2; // 20% charge
-const delay = 1000 * 60 * 10; // Every 10 minutes
+const threshold = 0.2;
+const delay = 1000 * 60 * 5;
+const ignoreCharge = false;
 
 var mb = menubar({
   width: 150,
@@ -19,8 +20,8 @@ mb.on('after-create-window', async () => {
 
 mb.on('ready', function ready() {
   console.log('Battery Watcher loaded');
-  checkBattery(threshold);
+  checkBattery(threshold, ignoreCharge);
   setInterval(() => {
-    checkBattery(threshold);
+    checkBattery(threshold, ignoreCharge);
   }, delay);
 });
