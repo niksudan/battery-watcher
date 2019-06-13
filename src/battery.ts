@@ -45,6 +45,34 @@ const aggressiveWarnings = [
   "SO IT'S COME TO THIS... I KNEW IT",
 ];
 
+const thankYouTitles = [
+  'Phew!',
+  'Thanks!',
+  'Hooray!',
+  'Juice Time!',
+  'Restored!',
+  'You Did It!',
+  'Nice One!',
+  'Woah!',
+];
+
+const thankYouMessages = [
+  'I thought I was a goner!',
+  'THANK YOU SO MUCH!',
+  "Please don't let me get that low again!",
+  'Thank you, master!',
+  "I knew you wouldn't let me die",
+  'You saved my life!',
+  "I don't know how to ever repay you",
+  'I bet I could have survived for a few more minutes',
+  "I'm fine. Yep. All better. A-OK.",
+  "I'm cured!",
+  'Wow, you actually listened to me?',
+  'Yooo.. you actually did it?!',
+  "I promise I won't ever react like that again",
+  'I get to live another day!',
+];
+
 const standardIcons = [
   '../img/standard1.png',
   '../img/standard2.png',
@@ -59,23 +87,46 @@ const aggressiveIcons = [
   '../img/aggressive4.png',
 ];
 
-module.exports = async (threshold, ignoreCharge = false) => {
-  if (!ignoreCharge) {
-    const charging = await isCharging();
-    if (charging) {
-      return;
+const happyIcons = [
+  '../img/happy1.png',
+  '../img/happy2.png',
+  '../img/happy3.png',
+  '../img/happy4.png',
+];
+
+let isGrateful = true;
+
+interface BatteryOptions {
+  threshold: number;
+}
+
+module.exports = async (options: BatteryOptions) => {
+  const charging = await isCharging();
+  if (charging) {
+    if (!isGrateful) {
+      isGrateful = true;
+      notifier.notify({
+        title: randomItem(thankYouTitles),
+        message: randomItem(thankYouMessages),
+        icon: path.join(__dirname, randomItem(happyIcons)),
+      });
     }
-  }
-  const battery = await batteryLevel();
-  if (battery > threshold) {
     return;
   }
+
+  const battery = await batteryLevel();
+  if (battery > options.threshold) {
+    return;
+  }
+
+  isGrateful = false;
   let warnings = standardWarnings;
   let icons = standardIcons;
-  if (battery <= threshold / 2) {
+  if (battery <= options.threshold / 2) {
     warnings = aggressiveWarnings;
     icons = aggressiveIcons;
   }
+
   notifier.notify({
     title: `${Math.floor(battery * 100)}% Battery Left!`,
     message: randomItem(warnings),
