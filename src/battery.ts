@@ -2,7 +2,6 @@ const batteryLevel = require('battery-level');
 const isCharging = require('is-charging');
 const notifier = require('node-notifier');
 const randomItem = require('random-item');
-const path = require('path');
 
 const standardWarnings = [
   'Haha, very funny... now plug me in',

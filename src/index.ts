@@ -1,5 +1,6 @@
 const menubar = require('menubar');
 const electron = require('electron');
+const path = require('path');
 const checkBattery = require('./battery');
 
 const options = {
@@ -10,7 +11,7 @@ const delay = 1000 * 60 * 5;
 
 var mb = menubar({
   width: 150,
-  height: 75,
+  height: 100,
 });
 
 mb.on('after-create-window', async () => {
@@ -22,6 +23,7 @@ mb.on('after-create-window', async () => {
 
 mb.on('ready', function ready() {
   console.log('Battery Watcher loaded');
+  mb.tray.setImage(path.join(__dirname, '../img/icon.png'));
   checkBattery(options);
   setInterval(() => {
     checkBattery(options);

@@ -1,39 +1,55 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Battery Watcher</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body {
-      font-family: sans-serif;
-      text-align: center;
-    }
-  </style>
-</head>
-
-<body>
-  <section>
-    <div>
-      <strong>
-        Battery Watcher
-        <br />
-        <small>v0.2.0</small>
-      </strong>
-      <br />
-      <a href="https://github.com/niksudan/battery-watcher" target="_blank">GitHub</a> | <a href="#" onclick="quit()">Quit</a>
-    </div>
-  </section>
-  <script type="text/javascript">
-    const remote = require('electron').remote;
-    function quit() {
-      if (remote) {
-        remote.app.exit();
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Battery Watcher</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        font-family: sans-serif;
+        text-align: center;
       }
-    }
-  </script>
-</body>
+      .heading {
+        font-weight: bold;
+      }
+      .version {
+        font-size: 0.9em;
+        color: grey;
+      }
+      .links {
+        font-size: 0.9em;
+        position: absolute;
+        bottom: 10px;
+        left: 0;
+        right: 0;
+      }
+    </style>
+  </head>
 
+  <body>
+    <section>
+      <div>
+        <img src="./img/icon.png" alt="" />
+        <div class="heading">
+          Battery Watcher
+        </div>
+        <div class="version">v0.2.0</div>
+        <div class="links">
+          <a href="https://github.com/niksudan/battery-watcher" target="_blank"
+            >GitHub</a
+          >
+          | <a href="#" onclick="quit()">Quit</a>
+        </div>
+      </div>
+    </section>
+    <script type="text/javascript">
+      const remote = require('electron').remote;
+      function quit() {
+        if (remote) {
+          remote.app.exit();
+        }
+      }
+    </script>
+  </body>
 </html>
