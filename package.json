@@ -5,7 +5,7 @@
     "battery-level": "^3.0.0",
     "is-charging": "^2.0.0",
     "menubar": "^5.2.3",
-    "node-notifier": "^5.2.1",
+    "node-notifier": "^8.0.1",
     "random-item": "^1.0.0"
   },
   "devDependencies": {
